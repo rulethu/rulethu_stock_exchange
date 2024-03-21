@@ -51,7 +51,7 @@ data = parser.parse()
 
 Write the data to JSON file
 ```ruby
-filename  =RulethuStockExchange::IO.write_to_json_file data, 'lse'
+filename = RulethuStockExchange::IO.write_to_json_file data, 'lse'
 ```
 
 Convert the JSON file to CSV
