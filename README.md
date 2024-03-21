@@ -59,7 +59,7 @@ The CSV file is generated as follows
 
 !["CSV Data London Stock Exchange 21/03/2023"](./LSE-Data-21-03-2024.png)
 
-### Example 1: Scraping Data From Zimbabwe Stock Exchange
+### Example 2: Scraping Data From Zimbabwe Stock Exchange
 
 For Zimbabwe Stock Exchange, the procedure is the same as in the previous example except that the parsing method is different as shown below.
 
@@ -75,7 +75,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/rulethu_stock_exchange.
+Bug reports and pull requests are welcome on GitHub at https://github.com/rulethu/rulethu_stock_exchange.
 
 ## License
 
