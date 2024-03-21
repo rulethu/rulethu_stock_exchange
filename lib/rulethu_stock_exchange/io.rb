@@ -14,7 +14,7 @@ module RulethuStockExchange
       File.open(filename, 'w') do |f|
         f.write(JSON.dump(data))
       end
-      return filename
+      filename
     end
 
     def self.json_to_csv(json_file)
@@ -32,6 +32,7 @@ module RulethuStockExchange
           csv << row.values
         end
       end
+      filename
     end
   end
 end

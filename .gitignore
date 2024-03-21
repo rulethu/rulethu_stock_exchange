@@ -7,3 +7,5 @@
 /spec/reports/
 /tmp/
 rulethu_stock_exchange-0.1.0.gem
+/data
+.idea/
