@@ -42,7 +42,7 @@ parser = RulethuStockExchange::Parser.new html
 
 Parse the data
 ```ruby
- data = parser.parse() 
+data = parser.parse() 
 ```
 
 Write the data to JSON file
@@ -52,7 +52,7 @@ filename  =RulethuStockExchange::IO.write_to_json_file data, 'lse'
 
 Convert the JSON file to CSV
 ```ruby
- RulethuStockExchange::IO.json_to_csv filename
+RulethuStockExchange::IO.json_to_csv filename
 ```
 
 The CSV file is generated as follows
