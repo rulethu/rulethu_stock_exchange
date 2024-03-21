@@ -1,24 +1,71 @@
 # RulethuStockExchange
 
-TODO: Delete this and the text below, and describe your gem
+This gem allows you to scrape stock exchange data from the following exchanges:
+* Zimbabwe Stock Exchange
+* Johannesburg Stock Exchange
+* London Stock Exchange
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/rulethu_stock_exchange`. To experiment with that code, run `bin/console` for an interactive prompt.
 
 ## Installation
 
-TODO: Replace `UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG` with your gem name right after releasing it to RubyGems.org. Please do not do it earlier due to security reasons. Alternatively, replace this section with instructions to install your gem from git if you don't plan to release to RubyGems.org.
-
 Install the gem and add to the application's Gemfile by executing:
 
-    $ bundle add UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG
+    $ bundle add rulethu_stock_exchange
 
 If bundler is not being used to manage dependencies, install the gem by executing:
 
-    $ gem install UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG
+    $ gem install rulethu_stock_exchange
 
 ## Usage
 
-TODO: Write usage instructions here
+### Example 1: Scraping Data From London Stock Exchange 
+
+Get Exchange
+
+```ruby
+exchange = RulethuStockExchange::Exchanges::LSE
+```
+Create a Scraper passing in the url for the exchangew
+```ruby
+scraper = RulethuStockExchange::Scraper.new exchange[:url]
+```
+
+Scrape the data passing in a selector
+```ruby
+html = scraper.scrape exchange[:selector]
+```
+
+Create a parser to parse the data
+```ruby
+parser = RulethuStockExchange::Parser.new html 
+```
+
+Parse the data
+```ruby
+ data = parser.parse() 
+```
+
+Write the data to JSON file
+```ruby
+filename  =RulethuStockExchange::IO.write_to_json_file data, 'lse'
+```
+
+Convert the JSON file to CSV
+```ruby
+ RulethuStockExchange::IO.json_to_csv filename
+```
+
+The CSV file is generated as follows
+
+!["CSV Data London Stock Exchange 21/03/2023"](./LSE-Data-21-03-2024.png)
+
+### Example 1: Scraping Data From Zimbabwe Stock Exchange
+
+For Zimbabwe Stock Exchange, the procedure is the same as in the previous example except that the parsing method is different as shown below.
+
+```ruby
+data = parser.parse_zse()
+```
 
 ## Development
 
