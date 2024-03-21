@@ -1,9 +1,9 @@
 # RulethuStockExchange
 
 This gem allows you to scrape stock exchange data from the following exchanges:
-* Zimbabwe Stock Exchange
-* Johannesburg Stock Exchange
-* London Stock Exchange
+* Zimbabwe Stock Exchange (ZSE)
+* Johannesburg Stock Exchange (JSE)
+* London Stock Exchange (LSE)
 
 
 ## Installation
@@ -19,8 +19,12 @@ If bundler is not being used to manage dependencies, install the gem by executin
 ## Usage
 
 ### Example 1: Scraping Data From London Stock Exchange 
+Require the gem
+```ruby
+require 'rulethu_stock_exchange'
+```
 
-Get Exchange
+Get the stock exchange. (Currently available stock exchanges are ZSE, JSE and LSE)
 
 ```ruby
 exchange = RulethuStockExchange::Exchanges::LSE
