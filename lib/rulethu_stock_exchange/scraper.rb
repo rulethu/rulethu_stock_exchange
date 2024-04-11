@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-require 'selenium-webdriver'
+require "selenium-webdriver"
 
 module RulethuStockExchange
   class Scraper
@@ -17,9 +17,17 @@ module RulethuStockExchange
     private
 
     def setup_driver
-      options = Selenium::WebDriver::Chrome::Options.new
+      options = Selenium::WebDriver::Firefox::Options.new
+
       options.add_argument("--headless")
-      Selenium::WebDriver.for :chrome, options: options
+      options.add_argument("--disable-gpu")
+
+      Selenium::WebDriver::Firefox::Service.driver_path = ENV["GECKODRIVER_PATH"] || `which geckodriver`.strip
+
+      # use argument `:debug` instead of `:info` for detailed logs in case of an error
+      Selenium::WebDriver.logger.level = :info
+
+      Selenium::WebDriver.for :firefox, options: options
     end
   end
 end
