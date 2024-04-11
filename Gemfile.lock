@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    rulethu_stock_exchange (0.1.4)
+    rulethu_stock_exchange (0.1.5)
       selenium-webdriver (~> 4.18)
 
 GEM

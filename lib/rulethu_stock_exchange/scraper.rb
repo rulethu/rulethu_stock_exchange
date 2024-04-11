@@ -22,7 +22,7 @@ module RulethuStockExchange
       options.add_argument("--headless")
       options.add_argument("--disable-gpu")
 
-      Selenium::WebDriver::Firefox.path = ENV["FIREFOX_BIN"] || `which firefox`
+      Selenium::WebDriver::Firefox.path = ENV["FIREFOX_BIN"] || `which firefox`.strip
       Selenium::WebDriver::Firefox::Service.driver_path = ENV["GECKODRIVER_PATH"] || `which geckodriver`.strip
 
       # use argument `:debug` instead of `:info` for detailed logs in case of an error
