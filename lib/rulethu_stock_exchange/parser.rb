@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-require 'selenium-webdriver'
+require "selenium-webdriver"
 
 module RulethuStockExchange
   class Parser
@@ -10,39 +10,39 @@ module RulethuStockExchange
     end
 
     def parse_zse
-      tbody = table.find_element(:tag_name, 'tbody')
-      rows = tbody.find_elements(:tag_name, 'tr')
-      body_data = []
-      puts "\nWriting body data"
+      tbody = table.find_element(:tag_name, "tbody")
+      rows = tbody.find_elements(:tag_name, "tr")
+      data_rows = []
       rows.each do |row|
-        cells = row.find_elements(:tag_name, 'td')
-        cells.each do |cell|
-          body_data << cell.text.strip
-        end
+        text = row.find_elements(:tag_name, "td").first.text.strip
+        data_rows << row unless text.empty?
       end
-      data = body_data.reject(&:empty?)
-      header_data = data[1..4].map { |d| d.gsub("\n", " ") }
-      remaining_data = data[5..]
-      grouped_data = remaining_data.each_slice(4).to_a
-      data = grouped_data.reject { |row| row.first.match?(/^[-+]?\d+(\.\d+)?$/) }
-      data = data[0...-1]
-      output = []
-      data.each do |row|
-        result = {}
-        row.each_with_index do |value, index|
-          result[header_data[index]] = value
-        end
-        output << result
-        print "."
+
+      header_data = []
+      rows[0].find_elements(:tag_name, "td").each do |td|
+        text = td.text.strip.gsub("\n", " ") || "#"
+        text = "#" if text.empty?
+        header_data << text
       end
-      output
+
+      data = []
+      data_rows.each do |row|
+        row_data = {}
+        cells = row.find_elements :tag_name, "td"
+        cells.each_with_index do |cell, index|
+          key = header_data[index] || "#"
+          row_data[key] = cell.text.strip
+        end
+        data << row_data
+      end
+      data
     end
 
     def parse
       header_data = []
       begin
         thead = table.find_element(:tag_name, "thead")
-        cells = thead.find_element(:tag_name, "tr").find_elements(:tag_name, 'th')
+        cells = thead.find_element(:tag_name, "tr").find_elements(:tag_name, "th")
         puts "Writing header data"
         cells.each do |cell|
           header_data << cell.text
@@ -52,12 +52,12 @@ module RulethuStockExchange
         # Handle missing header gracefully (e.g., log the error)
       end
       tbody = table.find_element(:tag_name, "tbody")
-      rows = tbody.find_elements(:tag_name, 'tr')
+      rows = tbody.find_elements(:tag_name, "tr")
       body_data = []
       puts "\nWriting body data"
       rows.each do |row|
         data = {}
-        cells = row.find_elements(:tag_name, 'td')
+        cells = row.find_elements(:tag_name, "td")
         if header_data.empty?
           header_data = cells.map(&:text)
         end
