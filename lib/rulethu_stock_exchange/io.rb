@@ -1,7 +1,7 @@
 # frozen_string_literal: true
-require 'json'
-require 'csv'
-require 'time'
+require "json"
+require "csv"
+require "time"
 
 module RulethuStockExchange
   class IO
@@ -10,8 +10,8 @@ module RulethuStockExchange
       date = Time.now.strftime("%d-%m-%Y")
       data_dir = Pathname.new("data") / Pathname.new(prefix)
       data_dir.mkpath
-      filename = "#{data_dir}/#{date}-data.json"
-      File.open(filename, 'w') do |f|
+      filename = "#{data_dir}/#{prefix}-#{date}-data.json"
+      File.open(filename, "w") do |f|
         f.write(JSON.dump(data))
       end
       filename
@@ -20,13 +20,13 @@ module RulethuStockExchange
     def self.json_to_csv(json_file)
       puts "\nConverting #{json_file} to CSV"
       data = Object.new
-      File.open(json_file, 'r') do |f|
+      File.open(json_file, "r") do |f|
         data = JSON.parse(f.read)
       end
 
-      filename = json_file.sub(/\.json$/, '.csv')
+      filename = json_file.sub(/\.json$/, ".csv")
 
-      CSV.open(filename, 'w') do |csv|
+      CSV.open(filename, "w") do |csv|
         csv << data.first.keys
         data.each do |row|
           csv << row.values
