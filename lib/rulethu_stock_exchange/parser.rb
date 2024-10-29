@@ -15,15 +15,19 @@ module RulethuStockExchange
       data_rows = []
       rows.each do |row|
         text = row.find_elements(:tag_name, "td").first.text.strip
-        data_rows << row unless text.empty?
+        unless text&.upcase == "EQUITIES"
+          data_rows << row unless text.empty?
+        end
       end
 
       header_data = []
-      rows[0].find_elements(:tag_name, "td").each do |td|
+      data_rows.first.find_elements(:tag_name, "td").each do |td|
         text = td.text.strip.gsub("\n", " ") || "#"
         text = "#" if text.empty?
         header_data << text
       end
+
+      data_rows = data_rows.slice(1, data_rows.length)
 
       data = []
       data_rows.each do |row|
