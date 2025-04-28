@@ -6,6 +6,23 @@ This gem allows you to scrape stock exchange data from the following exchanges:
 - Johannesburg Stock Exchange (JSE)
 - London Stock Exchange (LSE)
 
+## Docker setup (if you don't have firefox and geckodriver setup)
+##### Skip this step if you already have firefox and geckodriver installed
+```bash 
+docker build . -t rulethu_stock_exchange
+```
+
+#### Run bash inside docker
+```bash
+docker run -it rulethu_stock_exchange:latest bash
+```
+
+#### Enter the ruby console with gem loaded
+```bash 
+./bin/console
+```
+
+
 ## Installation
 
 Install the gem and add to the application's Gemfile by executing:
@@ -16,9 +33,9 @@ If bundler is not being used to manage dependencies, install the gem by executin
 
     $ gem install rulethu_stock_exchange
 
-## Usage
 
-** Make sure you have firefox browser installed **
+
+## Usage 
 
 ### Example 1: Scraping Data From London Stock Exchange
 
